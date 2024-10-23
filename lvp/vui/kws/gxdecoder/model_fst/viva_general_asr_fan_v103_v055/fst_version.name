@@ -1,0 +1,2 @@
+config LVP_MODEL_VIVA_GENERAL_ASR_FAN_V103_V055
+    bool "viva general asr fan v103 v055"

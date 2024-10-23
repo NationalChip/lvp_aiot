@@ -1,0 +1,49 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2021 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig:
+#
+#---------------------------------------------------------------------------------#
+
+if LVP_APP_UART_LOADER_8303
+
+    choice
+        prompt "MCU Work Low Frequency When MCU Is Not Wake:"
+        default APP_UART_LOADER_MCU_LOW_FREQUENCY_50M
+        depends on GX8002
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_2M
+            bool "2M"
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_4M
+            bool "4M"
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_8M
+            bool "8M"
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_12M
+            bool "12M"
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_24M
+            bool "24M"
+
+        config APP_UART_LOADER_MCU_LOW_FREQUENCY_50M
+            bool "50M"
+    endchoice
+
+    config APP_UART_LOADER_KWS_TIME_OUT
+        int "KWS Time Out"
+        default 15
+
+    config APP_UART_LOADER_HAS_LED
+        bool "has led"
+        default n
+
+    if APP_UART_LOADER_HAS_LED
+        config APP_UART_LOADER_KWS_LED_PIN_ID
+            int "KWS LED GPIO"
+            default 1
+    endif
+
+endif

@@ -1,0 +1,2 @@
+config LVP_MODEL_VIVA_BLE_SAMPLE
+    bool "viva ble sample"

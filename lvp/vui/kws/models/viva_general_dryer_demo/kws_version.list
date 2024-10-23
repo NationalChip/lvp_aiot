@@ -1,0 +1,15 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2024 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: One KeyWord Name For ../Kconfig
+#---------------------------------------------------------------------------------#
+
+choice
+    prompt "Model select:"
+    default LVP_KWS_VIVA_GENERAL_DRYER_DEMO_DRYING_RACK_EXCLUSIVE_MODEL_V5DOT0DOT4_2024_0725
+    depends on LVP_KWS_VIVA_GENERAL_DRYER_DEMO
+
+    source "lvp/vui/kws/models/viva_general_dryer_demo/*/kws_version.name"
+endchoice
+

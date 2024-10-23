@@ -1,0 +1,15 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2024 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: One KeyWord Name For ../Kconfig
+#---------------------------------------------------------------------------------#
+
+choice
+    prompt "Model select:"
+    default LVP_KWS_VIVA_BLE_SAMPLE_LIGHT_EXCLUSIVE_MODEL_V6DOT0DOT2_2024_0905
+    depends on LVP_KWS_VIVA_BLE_SAMPLE
+
+    source "lvp/vui/kws/models/viva_ble_sample/*/kws_version.name"
+endchoice
+

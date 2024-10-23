@@ -1,0 +1,9 @@
+choice
+    prompt "gxdecoder language model select:"
+    default LVP_MODEL_FST_KUQI_FAN
+
+    source "lvp/vui/kws/gxdecoder/model_fst/*/fst_version.name"
+
+endchoice
+
+

@@ -1,0 +1,45 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2019 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: KWS Kconfig
+#---------------------------------------------------------------------------------#
+
+choice
+    prompt "KeyWord select:"
+    default LVP_KWS_GENERAL_ASR_HOTATA_DRYER
+
+    source "lvp/vui/kws/models/*/kws.name"
+endchoice
+
+# kws version list
+source "lvp/vui/kws/models/*/kws_version.list"
+# kws model param kconfig
+source "lvp/vui/kws/models/*/*/Kconfig"
+# kws list
+source "lvp/vui/kws/models/*/*/kws.list"
+
+
+
+config LVP_MODEL_USE_RNN
+    bool "Model Use Recurrent Neural Network"
+    default y
+
+config LVP_ENABLE_CTC_BIONIC
+    bool "Enable CTC BIONIC To Reduce False Activation"
+    default n
+    depends on LVP_ENABLE_CTC_GX_DECODER
+config LVP_KWS_THRESHOLD_STEP
+    int "[CTC] Threshold Step For Bionic(x10)"
+    depends on LVP_ENABLE_CTC_BIONIC
+    default 5
+config LVP_KWS_MAX_THRESHOLD_ADJUSTMENT_VALUE
+    int "[CTC] Maximum Threshold Adjustment Value For Bionic(x10)"
+    depends on LVP_ENABLE_CTC_BIONIC
+    default 20
+config LVP_KWS_THRESHOLD_ADJUST_TIME
+    int "[CTC] Threshold Adjust time For Bionic(Second)"
+    depends on LVP_ENABLE_CTC_BIONIC
+    default 500
+
+#---------------------------------------------------------------------------------#

@@ -1,0 +1,15 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2024 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: One KeyWord Name For ../Kconfig
+#---------------------------------------------------------------------------------#
+
+choice
+    prompt "Model select:"
+    default LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055_UNIVERSAL_450K_MODEL_V0DOT5DOT5_2024_0806
+    depends on LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055
+
+    source "lvp/vui/kws/models/viva_general_asr_fan_v103_v055/*/kws_version.name"
+endchoice
+

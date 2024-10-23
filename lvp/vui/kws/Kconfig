@@ -1,0 +1,100 @@
+#
+# Grus
+# Copyright (C) 2001-2023 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: Gurs Kconfig
+#---------------------------------------------------------------------------------#
+
+# Public Model Values
+config KWS_SNPU_BUFFER_SIZE
+    int
+
+config KWS_MODEL_FEATURES_DIM_PER_FRAME
+    int
+
+config KWS_MODEL_INPUT_STRIDE_LENGTH
+    int
+
+config KWS_MODEL_INPUT_WIN_LENGTH
+    int
+
+config KWS_MODEL_OUTPUT_LENGTH
+    int
+
+config KWS_MODEL_SUPPORT_SOFTMAX
+    bool
+
+config KWS_MODEL_BEAMSEARCH_AND_LM_ALPHA
+    int
+
+config KWS_MODEL_BEAMSEARCH_AND_LM_BETA
+    int
+
+config KWS_MODEL_BEAMSEARCH_AND_LM_CUTOFF_TOP_N
+    int
+
+config BEAM_SIZE
+    int
+
+config PREFIX_CHAR_LENGTH
+    int
+
+config LEVENSHTEIN_THRESHOLD
+    int
+
+config DIMSIM_THRESHOLD
+    int
+
+config NORMAL_CTC_SCORE
+    bool
+
+config NPU_TOTAL_SIZE
+    int
+
+#---------------------------------------------------------------------------------#
+
+choice
+    prompt "Keyword Decoder Type"
+    default LVP_ENABLE_CTC_GX_DECODER
+
+    config LVP_ENABLE_CTC_GX_DECODER
+        bool "CTC GX Deocder"
+    config LVP_ENABLE_USER_DECODER
+        bool "User Deocder"
+
+endchoice
+
+if LVP_ENABLE_CTC_GX_DECODER
+    config ENABLE_USED_FOR_ALL_GRUS_FAMILY
+        bool "Enable Used For All Grus Family"
+        default y
+    config ENABLE_DO_NOT_SLEEP_WHEN_AT_WAKE_UP
+        bool "Enable Do not sleep when at wake up"
+        default y
+    config ENABLE_SWITCH_NPU_MODEL_RUN_IN_FLASH_OR_SRAM
+        bool "Enable Switch Npu Model Run In Flash Or Sram"
+        default n
+    config ENABLE_PRINTF_GXDECODER_MEMORY_MONITORING
+        bool "Enable GXdecoder Memory Monitoring"
+        default n
+    config BLANK_THRESHOLD_FOR_CTC_GX_DECODER
+        int "Blank Threshold For CTC GX Decoder(x1000)"
+        default 900
+    source "lvp/vui/kws/gxdecoder/Kconfig"
+    comment ""
+    config ENABLE_FAST_DECODER
+        bool "Enable Fast Decoder"
+        default n
+    config FAST_DECODER_SKIP_INVALID_CONTEXT
+        depends on ENABLE_FAST_DECODER
+        int "Skip Invalid Context Number"
+        default 6
+    comment ""        
+endif
+
+source "lvp/vui/kws/models/Kconfig"
+
+
+
+#---------------------------------------------------------------------------------#

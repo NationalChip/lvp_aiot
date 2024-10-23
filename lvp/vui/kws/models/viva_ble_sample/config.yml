@@ -1,0 +1,144 @@
+# 芯片类型，设置想要运行的芯片类型，如：GX8002D 或 GX8003A
+chip_name: "GX8003A" #LVP 工程支持的芯片
+# chip_name: "GX8002D" #LVP 工程支持的芯片
+# chip_name: "GX8302B" #APUS 工程支持的芯片
+# chip_name: "GX8008C" #VSP 工程支持的芯片
+
+# 想要新建app时可以打开注释，并设置成自己想要的名字
+# app_name: "user_app"
+
+# 模型部署名称，根据模型应用需求配置。如果是已经部署过的模型的迭代，需保持与已有模型的命名一致。如有需要，使用下划线做分割。
+model_name: "ble_sample"
+
+model_version: v6.0.2
+# model_version: v0.1.2 #APUS 下的声学模型版本
+new_model: Y
+update_model: Y
+update_language_model: Y
+lvp_tws_path: "/home/zhangyl/robotos2/lvp_pro/lvp_aiot/lvp/vui/kws/"                                      # LVP SDK 模型存放路径
+# lvp_tws_path: "robotos/apus/apps/ai_voice/src/kws/model_fst/"                # APUS SDK 模型存放路径
+# lvp_tws_path: "../../vsp/dsp/vpa/olab_op/src/rock/kws/gxdecoder/model_fst/"  # VSP SDK 模型存放路径
+
+# vpa_simulate_path: "../../lvp/vpa_simulate/vpa/lvp/src/vui/kws/" # 注释掉即可，不需关心
+major_kws_misactive_number: 3
+command_word_misactive_number: 8
+immediate_command_word_misactive_number: 3
+threshold_updated_to_kws_list: Y
+print_uart: 1       # 打开注释则开启串口打印，设置值为使用的 串口号
+
+# 设置脚本运行可使用的cpu个数，可根据自己的电脑配置修改【要小于电脑实际cpu数 - 1】
+cpu_count: 7
+
+# 语言模型标志位, 在含有三个字的指令词，并且这个指令词与其它词具有包含关系时可设置为1
+lm_3char_inclusion_flag: 0
+
+# 当串词严重的时候，可通过降低或升高某个词的概率来进行微调，设置的系数范围 0 < 系数 < 2，(1, 2) 降低概率，(0, 1) 升高概率
+# words_probability_fine_tuned:
+#   打开冷风: 1.5
+#   关闭冷风: 0.5
+
+# tts语言风格,只可选择一个。不需要tts播报，可将此字段删除，或在后面填 " null"，注意 yml文件语法冒号与设置的值中间有个空格
+tts_style:
+#  - mowenxuan_meet         # 男声--魔文轩-磁性温和,爽朗动听
+#  - billy_meet             # 男声--魔小杰-纯净动听,朗朗悦耳
+#  - baibianjianzhang_meet  # 男声--百变舰长-阳光帅气,爽朗动听
+#  - moshuqi_meet           # 女声--魔殊琪--温柔甜美,自然动听
+#  - monuandong_meet        # 女声--魔暖冬--元气少女,自然流畅
+#  - molajiao_meet          # 女声--魔辣椒--温柔甜美,自然动听
+#  - mofangguan_meet        # 女声--魔芳官--成熟温柔,自然流畅
+#  - mercury_xiaoxiao       # 女声--小柔--纯净甜美,自然动听
+#  - mercury_hsiaochen      # 女声--台湾晓臻--亲切温和,淳朴自然
+#  - jupiter_BV001          # 女声--抖音小姐姐--温柔甜美,自然动听
+#  - F110_meet              # 女声--小依--温柔柔软,清新甜美
+ - moyunxuan_meet         # 女声--魔芸萱-温柔甜美,自然动听
+#  - moxiaoqif_meet         # 女声--魔小琪-温柔知性,温婉大方
+#  - caicai_meet            # 女声--采采-幽默诙谐,亲切甜美
+
+# tts播放音量，默认 50， 越小声音越轻
+tts_volume: 50
+# tts播放速度，默认 50， 越小越慢
+tts_speed: 50
+# 超时时间
+time_out_duration: 10
+
+# 自定义播报内容，若想将文本替换成指定的音频可在括号内写指定路径
+# custom_broadcast:
+#   - 滴(tts_play/resource_wav/蜂鸣器声.wav)
+#   - 自定义播报文本
+
+#设置 调试打印串口
+set_debug_uart:
+  uart_port: 1                      # 设置板级 调试输出串口号 0/1, 对应之前的print_uart
+
+#设置上报(输出)串口, 对国芯模组内部处理结果，通过十六进制发送出去 一般是发送给主控的消息
+set_tx_uart:
+ uart_port: 1                      # 设置板级 发送串口号 0/1
+ uart_baudrate: 115200             # 设置板级 发送波特率
+ report_times: 1                   # 上报(发送)次数
+ report_interval: 100              # 上报(发送)时间间隔
+#  custom_event_report: null
+  # - 777:
+  #     62 75 78 00 99 07
+
+
+# 开机tts播报，没有开机播报可将此字段删除，或在后面填 " null"，注意 yml文件语法冒号与设置的值中间有个空格
+power_on_tts:
+  - 欢迎使用
+# 超时tts播报，没有超时播报可将此字段删除，或在后面填 " null"，注意 yml文件语法冒号与设置的值中间有个空格
+time_out_tts:
+  - 再见
+
+#设置接收(输入)串口，国芯模组对外部输入接收，并处理结果, 一般接收十六进制协议, 一般是主控发送过来的消息
+set_rx_uart:
+  # 想要在串口接收到特定指令时进行播报响应可以打开下面注释
+  # 设置使用的串口
+  uart_port: 0
+  # 设置使用的波特率
+  uart_baudrate: 115200
+  # 设置串口接收到对应指令的回复播报
+  # 格式: uart_data@播报文本，当串口接收到和uart_data一致的数据时，开始播报后面的文本
+  # 需要 uart_data 的长度一致，不一致时将按照最长的长度在后面补零
+  uart_tts_reply_list:
+  - 62 75 78 00 01 ff@开灯
+  - 62 75 78 00 02 ff@关灯
+  - 62 75 78 00 03 ff@调高亮度
+  - 62 75 78 00 04 ff@调低亮度
+  - 62 75 78 00 05 ff@中等亮度
+  - 62 75 78 00 06 ff@调整色温
+  - 62 75 78 00 07 ff@白光
+  - 62 75 78 00 08 ff@黄光
+  - 62 75 78 00 09 ff@中性光
+  - 62 75 78 00 10 ff@小夜灯
+  - 62 75 78 00 11 ff@开辅助灯
+  - 62 75 78 00 12 ff@关辅助灯
+  - 62 75 78 00 13 ff@主人，再见
+
+
+# 主唤醒词列表，没有可将此字段删除，或在后面填 " null"，注意 yml文件语法冒号与设置的值中间有个空格
+major_list:
+  - 小漠小漠
+
+# 免唤醒词列表，没有可将此字段删除，或在后面填 " null"，注意 yml文件语法冒号与设置的值中间有个空格
+# immediate_command_word_list:
+#   - 音量增大
+#   - 音量减小
+
+# 唤醒词列表，需要需要包括 主唤醒词、免唤醒词 与 指令词 三部分
+# 设置格式: <唤醒词[|唤醒词]...>[<#>id][<@>播报文本], 顺序为 唤醒词、id、播报文本
+# 注意设置多个唤醒词时符号"|"不可省略，主唤醒词设置多条播报时，符号"@"不可省略
+# 主唤醒词最多支持3条不同的TTS播报，指令词只支持一条TTS播报
+words_list:
+ - 小漠小漠<62 75 78 00 64 07>
+ - 打开灯光|打开灯|开灯|把灯打开|我回来了|我起床了<62 75 78 00 65 07>
+ - 关闭灯光|关闭灯|关灯|把灯关闭<62 75 78 00 66 07>
+ - 最高亮度|最大亮度|亮一点|调亮一点<62 75 78 00 67 07>
+ - 最低亮度|最小亮度|暗一点|调暗一点<62 75 78 00 68 07>
+ - 中等亮度<62 75 78 00 69 07>
+ - 变颜色|调色温|切换色温<62 75 78 00 70 07>
+ - 开白光|打开白光|白光<62 75 78 00 71 07>
+ - 开黄光|打开黄光|黄光<62 75 78 00 72 07>
+ - 中性光|开中性光|打开中性光<62 75 78 00 73 07>
+ - 小夜灯|开小夜灯<62 75 78 00 74 07>
+ - 开辅助灯|打开辅助灯<62 75 78 00 75 07>
+ - 关辅助灯|关闭辅助灯<62 75 78 00 76 07>
+ - 我出去了<62 75 78 00 77 07>

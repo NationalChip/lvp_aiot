@@ -1,0 +1,118 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2021 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig:
+#
+#---------------------------------------------------------------------------------#
+
+if LVP_APP_KWS_STATE_DEMO
+
+    choice
+        prompt "MCU Work Low Frequency When MCU Is Not Wake:"
+        default MCU_LOW_FREQUENCY_8M
+
+        config MCU_LOW_FREQUENCY_2M
+            bool "2M"
+
+        config MCU_LOW_FREQUENCY_4M
+            bool "4M"
+
+        config MCU_LOW_FREQUENCY_8M
+            bool "8M"
+
+        config MCU_LOW_FREQUENCY_12M
+            bool "12M"
+
+        config MCU_LOW_FREQUENCY_24M
+            bool "24M"
+
+        config MCU_LOW_FREQUENCY_50M
+            bool "50M"
+    endchoice
+
+    config APP_VC_KWS_TIME_OUT
+        int "KWS Time Out"
+        default 10
+
+    config APP_VC_HAS_LED
+        bool "has led"
+        default n
+
+    if APP_VC_HAS_LED
+        config APP_VC_KWS_LED_PIN_ID
+            int "KWS LED GPIO"
+            default 3
+    endif
+
+    config GX_STANDARD_SERIAL_UART_PROTOCOL
+        bool "has GX Standard Serial Uart Protocol"
+        default N
+        select LVP_HAS_UART_MESSAGE_2_0
+
+        config APP_VC2_UART
+            bool "by uart"
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+        config APP_VC2_HW_I2C
+            bool "by HW I2C"
+            select BOARD_HAS_HW_I2C
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+        config APP_VC2_HAS_MESSAGE_NOTIFY_PIN
+            bool "has notify pin"
+            default N
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+        if APP_VC2_HAS_MESSAGE_NOTIFY_PIN
+            config APP_VC2_MESSAGE_NOTIFY_PIN_ID
+            int "notify pin ID"
+            default 2
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+        endif
+
+        config UART_AWAKE
+            bool "has uart awake"
+            default N
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+        if UART_AWAKE
+            choice
+                prompt "port"
+                config UART0_AWAKE
+                    bool "UART0"
+                    depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+                config UART1_AWAKE
+                    bool "UART1"
+                    depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+            endchoice
+        endif
+
+        choice
+            prompt "uart message config"
+            depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+            config APP_VC2_UART_MESSAGE_QUERY_SUPPORTED
+                bool "Uart message query supported"
+                depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+
+            config APP_VC2_UART_MESSAGE_NOTIFY_SUPPORTED
+                bool "Uart message notify supported"
+                depends on GX_STANDARD_SERIAL_UART_PROTOCOL
+        endchoice
+
+    config USER_STANDARD_SERIAL_UART_PROTOCOL
+        bool "has User Standard Serial Uart Protocol"
+        default N
+
+        config APP_USE_UART
+            int "Set the serial port to use"
+            default 0
+            range 0 1
+            depends on USER_STANDARD_SERIAL_UART_PROTOCOL
+
+        config APP_USE_UART_BAUDRATE
+            int "Set the baudrate to use"
+            default 9600
+            depends on USER_STANDARD_SERIAL_UART_PROTOCOL
+endif

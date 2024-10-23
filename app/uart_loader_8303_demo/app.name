@@ -1,0 +1,14 @@
+# Voice Signal Preprocess
+# Copyright (C) 2001-2021 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# app.name
+#
+#---------------------------------------------------------------------------------#
+
+config LVP_APP_UART_LOADER_8303
+    bool "uart loader 8303"
+    select LVP_HAS_UART_LOADER
+    help
+        "Detail:"
+

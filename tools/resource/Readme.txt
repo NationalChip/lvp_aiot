@@ -1,0 +1,1 @@
+* viva 生成的 resource.bin 会放到该目录

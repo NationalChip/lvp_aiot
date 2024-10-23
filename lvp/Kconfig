@@ -1,0 +1,183 @@
+#
+# Grus
+# Copyright (C) 2001-2023 NationalChip Co., Ltd
+# ALL RIGHTS RESERVED!
+#
+# Kconfig: Gurs Kconfig
+#---------------------------------------------------------------------------------#
+
+#--------------------------------------------#
+
+menu "LVP Workmode settings"
+
+    choice
+        prompt "Initial Workmode selects:"
+
+    config LVP_INIT_WORKMODE_TWS
+        bool "TWS"
+        depends on LVP_HAS_TWS_MODE
+
+    endchoice
+
+    menuconfig LVP_HAS_TWS_MODE
+        bool "Has TWS workmode"
+        default y
+        help
+          If you need TWS workmode, say Y here!
+
+    if LVP_HAS_TWS_MODE
+    endif
+
+endmenu
+
+menu "I/O Buffer Settings"
+    config MIC_CHANNEL_NUM
+        int "MIC Channel Number"
+        default 1
+        range 1 3
+        depends on LVP_BUFFER_HAS_MIC
+
+    config REF_CHANNEL_NUM
+        int "REF Channel Number"
+        default 0
+        range 0 1
+        depends on LVP_BUFFER_HAS_REF
+
+    config FFT_CHANNEL_NUM
+        int "FFT Channel Number"
+        default 0
+        range 0 2
+        depends on LVP_BUFFER_HAS_FFT
+
+    config LOGFBANK_CHANNEL_NUM
+        int "Logfbank Channel Number"
+        default 1
+        range 1 1
+        depends on ENABLE_HARDWARE_LOGFBANK
+
+    config LVP_HAS_OUT_CHANNEL
+        bool "Has output Channel"
+        default n
+    if LVP_HAS_OUT_CHANNEL
+        config OUT_CHANNEL_NUM
+            int "Output Channel Number"
+            default 0
+            range 1 10
+    endif
+    comment ""
+
+#--------------------------------------------#
+    comment "Frame settings:"
+    choice
+        prompt "Sample Rate selects:"
+        default PCM_SAMPLE_RATE_16K
+
+        config PCM_SAMPLE_RATE_8K
+            bool "8KHz"
+
+        config PCM_SAMPLE_RATE_16K
+            bool "16KHz"
+
+        config PCM_SAMPLE_RATE_48K
+            bool "48KHz"
+            depends on BOARD_HAS_AIN_I2S_MASTER || BOARD_HAS_AIN_I2S_SLAVE
+    endchoice
+
+    choice
+        prompt "PCM Frame Length selects:"
+        default PCM_FRAME_LENGTH_10MS
+
+        config PCM_FRAME_LENGTH_1MS
+            bool "1ms"
+            depends on PCM_SAMPLE_RATE_48K
+        config PCM_FRAME_LENGTH_2MS
+            bool "2ms"
+            depends on PCM_SAMPLE_RATE_48K
+        config PCM_FRAME_LENGTH_4MS
+            bool "4ms"
+        config PCM_FRAME_LENGTH_10MS
+            bool "10ms"
+        config PCM_FRAME_LENGTH_16MS
+            bool "16ms"
+    endchoice
+    comment ""
+
+#--------------------------------------------#
+    comment "Context settings:"
+
+    config LVP_CONTEXT_GAP
+        int "Context Gap"
+        range 1 3
+        default 1
+
+    config LVP_CONTEXT_NUM
+        int "Context Number"
+        range LVP_CONTEXT_GAP 8
+        default 4
+
+    config LVP_PCM_FRAME_NUM_PER_CONTEXT
+        int "PCM Frame Number in a Context"
+        range 1 10
+        default 3
+
+    config SNPU_BUFFER_NUMBER
+        int "Snpu Buffer Number"
+        range 3 LVP_CONTEXT_NUM
+        default 3
+    comment ""
+
+#--------------------------------------------#
+    comment "Buffer settings:"
+
+    config LVP_PCM_FRAME_NUM_PER_CHANNEL
+        int "PCM Frame Number in a Channel"
+        range 0 100
+        default 24
+        help
+        The value much depends on the audio in device, which requires channel buffer should be multiples of 128.
+        the value should be greater than (LVP_CONTEXT_NUM * LVP_PCM_FRAME_NUM_PER_CONTEXT)
+
+    config LVP_FFT_FRAME_NUM_PER_CHANNEL
+        int "FFT Frame Number"
+        range 2 20
+        default 24
+        depends on ENABLE_HARDWARE_FFT
+
+    config LVP_LOGFBANK_FRAME_NUM_PER_CHANNEL
+        int "Logfbank Frame Number"
+        range LVP_PCM_FRAME_NUM_PER_CHANNEL 150
+        default 12
+        depends on ENABLE_HARDWARE_LOGFBANK
+
+    if LVP_HAS_OUT_CHANNEL
+        config LVP_OUT_CHANNEL_CUSTOMIZE
+            bool "Customize Out Channel"
+            default n
+
+        if LVP_OUT_CHANNEL_CUSTOMIZE
+            config LVP_OUT_FRAME_SIZE
+                int "Out frame size, 1 frame per context"
+                default 16
+
+            config LVP_OUT_FRAME_NUM_PER_CHANNEL
+                int "Out Frame Number Per Channel"
+                default LVP_CONTEXT_NUM
+        endif
+    endif
+
+    if UART_RECORD_ENABLE || LVP_HAS_RECORD_MODE
+        if LVP_LOGFBANK_FRAME_NUM_PER_CHANNEL!=LVP_PCM_FRAME_NUM_PER_CHANNEL
+            comment "[Error] PCM Frame Number in a Channel Need Equal To Logfbank Frame Number"
+        endif
+    endif
+
+    comment ""
+    # -------------------------------------- #
+    comment "Audio out buffer settings:"
+
+    config AUDIO_OUT_BUFFER_SIZE_KB
+        int "audio out buffer size (KBytes)"
+        default 0
+
+endmenu
+
