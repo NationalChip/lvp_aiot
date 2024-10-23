@@ -1,6 +1,6 @@
 # lvp_aiot
 
-## 低功耗语音识别、可配置离线语音识别SDK，配套viva(https://github.com/NationalChip/viva) 可以0代码开发lvp_aiot。
+## 低功耗、可配置离线语音识别SDK，配套viva(https://github.com/NationalChip/viva) 可以0代码开发lvp_aiot。
 
 ## 默认示例
 ```
