@@ -1,2 +1,0 @@
-config LVP_MODEL_VIVA_GENERAL_DRYER_DEMO
-    bool "viva general dryer demo"
