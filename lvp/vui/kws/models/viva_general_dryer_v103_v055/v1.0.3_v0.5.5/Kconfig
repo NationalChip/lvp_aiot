@@ -1,6 +1,6 @@
 
 menu "Model Param Setting:"
-    depends on LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055_UNIVERSAL_450K_MODEL_V0DOT5DOT5_2024_0806
+    depends on LVP_KWS_VIVA_GENERAL_DRYER_V103_V055_V1DOT0DOT3_V0DOT5DOT5_2024_1031
     config NORMAL_CTC_SCORE
       default y
 
@@ -30,6 +30,6 @@ menu "Model Param Setting:"
 
     config KWS_MODEL_DECODER_WIN_LENGTH
         int "KWS Model Decoder Window Length (unit of context)"
-        default 36
+        default 21
 endmenu
 

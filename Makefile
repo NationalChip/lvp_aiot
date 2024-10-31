@@ -616,11 +616,19 @@ ifeq ($(CONFIG_DL), y)
 endif
 
 ifeq ($(CONFIG_LVP_HAS_RESOURCE_BIN), y)
-	@$(eval CONFIG := $(shell grep -o 'CONFIG_LVP_KWS_VIVA_.*_V[0-9]*DOT[0-9]*DOT[0-9]*_[0-9]*_[0-9]*=y' .config | sed 's/CONFIG_LVP_KWS_//g' | sed 's/_[0-9]*_[0-9]*=y//g'))
+	@$(eval CONFIG := $(shell grep -o 'CONFIG_LVP_KWS_VIVA_.*_V[0-9A-Za-z]*DOT[0-9A-Za-z]*DOT[0-9A-Za-z]*_[0-9]*_[0-9]*=y' .config | sed 's/CONFIG_LVP_KWS_//g' | sed 's/_[0-9]*_[0-9]*=y//g'))
 	@$(eval CONFIG_LOWER := $(shell echo $(CONFIG) | tr '[:upper:]' '[:lower:]'))
-	@$(eval MODEL_NAME := $(shell echo $(CONFIG_LOWER) | sed 's/_v[0-9]*dot[0-9]*dot[0-9]*//g'))
-	@$(eval MODEL_VERSION := $(shell echo $(CONFIG_LOWER) | grep -o 'v[0-9]*dot[0-9]*dot[0-9]*' | sed 's/dot/./g'))
+	@$(if $(CONFIG_ENABLE_SWITCH_NPU_MODEL_RUN_IN_FLASH_OR_SRAM), \
+		$(eval MODEL_NAME := $(shell echo $(CONFIG_LOWER) | sed 's/_v[0-9a-z]*dot[0-9a-z]*dot[0-9a-z]*_v[0-9a-z]*dot[0-9a-z]*dot[0-9a-z]*$$//')), \
+		$(eval MODEL_NAME := $(shell echo $(CONFIG_LOWER) | sed 's/_v[0-9a-z]*dot[0-9a-z]*dot[0-9a-z]*$$//')))
+	@$(if $(CONFIG_ENABLE_SWITCH_NPU_MODEL_RUN_IN_FLASH_OR_SRAM), \
+		$(eval MODEL_VERSION := $(shell echo $(CONFIG_LOWER) | grep -o 'v[0-9a-z]*dot[0-9a-z]*dot[0-9a-z]*' | tail -n 2 | sed 's/dot/./g' | tr '\n' '_' | sed 's/_$$//')), \
+		$(eval MODEL_VERSION := $(shell echo $(CONFIG_LOWER) | grep -o 'v[0-9a-z]*dot[0-9a-z]*dot[0-9a-z]*' | tail -n 1 | sed 's/dot/./g')))
 	@$(eval RESOURCE_BIN := tools/resource/resource_$(MODEL_NAME)_$(MODEL_VERSION).bin)
+	@echo [Model Config: $(CONFIG)]
+	@echo [Model Name: $(MODEL_NAME)]
+	@echo [Model Version: $(MODEL_VERSION)]
+	@echo [RESOURCE_BIN: $(RESOURCE_BIN)]
 	@cp output/mcu_nor.bin output/mcu_no_tts.bin
 	@cp $(MCU_NOR_BIN) $(MCU_ALL_BIN)
 	@$(eval ZERO_FILL_SIZE := 0)
@@ -632,9 +640,6 @@ ifeq ($(CONFIG_CUSTOM_STORAGE_SPACE), y)
 endif
 	@$(eval RESOURCE_OFFSET_ADJUSTED := $(shell echo $$(($(RESOURCE_OFFSET) + $(ZERO_FILL_SIZE)))))
 	@dd if=$(RESOURCE_BIN) of=$(MCU_ALL_BIN) bs=1 seek=$(RESOURCE_OFFSET_ADJUSTED) conv=notrunc
-	@echo [Model Name: $(MODEL_NAME)]
-	@echo [Model Version: $(MODEL_VERSION)]
-	@echo [RESOURCE_BIN: $(RESOURCE_BIN)]
 	@echo [Merger $(MCU_ALL_BIN)]
 	@if [ `stat -c%s $(MCU_ALL_BIN)` -gt $$(($(MAX_SIZE_KB) * 1024)) ]; then \
 		truncate -s $(MAX_SIZE_KB)K $(MCU_ALL_BIN); \

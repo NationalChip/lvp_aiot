@@ -1,0 +1,2 @@
+config LVP_MODEL_VIVA_GENERAL_DRYER_V103_V055
+    bool "viva general dryer v103 v055"

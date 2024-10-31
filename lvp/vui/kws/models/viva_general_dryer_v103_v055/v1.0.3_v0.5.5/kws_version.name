@@ -2,10 +2,10 @@
 # Copyright (C) 2001-2024 NationalChip Co., Ltd
 # ALL RIGHTS RESERVED!
 #
-# Kconfig: One KeyWord Name For ../Kconfig
+# Kconfig: Model Name
 #---------------------------------------------------------------------------------#
 
-config LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055
-    bool "viva general asr fan v103 v055"
+config LVP_KWS_VIVA_GENERAL_DRYER_V103_V055_V1DOT0DOT3_V0DOT5DOT5_2024_1031
+    bool "LVP_KWS_VIVA_GENERAL_DRYER_V103_V055_V1DOT0DOT3_V0DOT5DOT5_2024_1031"
 
 #---------------------------------------------------------------------------------#

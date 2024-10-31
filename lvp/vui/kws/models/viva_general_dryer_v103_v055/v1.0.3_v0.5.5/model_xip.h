@@ -1,7 +1,7 @@
 #include<lvp_attr.h>
 
 #if 0
-const char *kws_version = "viva_general_asr_fan_v103_v055_universal_450k_model_v0.5.5_2024_0806";
+const char *kws_version = "viva_general_dryer_v103_v055_v1.0.3_v0.5.5_2024_1031";
 
 const unsigned int total_size = 432434;
 const unsigned int npu_size DRAM0_NPU_KEEP_ATTR = 423142;
@@ -37982,8 +37982,6 @@ unsigned char xip_kws_weight_content[370702] __attribute__ ((aligned(4))) DRAM0_
 	0xff, 0x00,
 };
 unsigned char *xip_kws_tmp_content = (void*)0;
-// unsigned char xip_kws_tmp_content[0] __attribute__ ((aligned(4))) DRAM0_NPU_WEIGHT_ATTR = {
-// } ;
 unsigned char xip_kws_ops_content[0] __attribute__ ((aligned(4))) = {
 };
 unsigned char xip_kws_data_content[43776] __attribute__ ((aligned(4))) DRAM0_NPU_ATTR;

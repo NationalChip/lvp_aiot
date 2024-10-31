@@ -4,9 +4,9 @@
 #define UMAP_PROTECT
 
 //以下三个参数和fst文件强相关， 文件中可以读到需要多少
-#define FINALS_LENGTH 73
-#define MAX_STATES 1071
-#define MAX_ARCS 4260
+#define FINALS_LENGTH 55
+#define MAX_STATES 801
+#define MAX_ARCS 3090
 
 #define TMP_ARRAY_SIZE 1000
 #define MAX_RESULTS 30

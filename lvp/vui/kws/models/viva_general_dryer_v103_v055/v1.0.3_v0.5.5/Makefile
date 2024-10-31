@@ -7,9 +7,9 @@
 #
 #=================================================================================#
 
-ifeq ($(CONFIG_LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055_UNIVERSAL_450K_MODEL_V0DOT5DOT5_2024_0806), y)
+ifeq ($(CONFIG_LVP_KWS_VIVA_GENERAL_DRYER_V103_V055_V1DOT0DOT3_V0DOT5DOT5_2024_1031), y)
 
-MODEL_DIR_PRE  = lvp/vui/kws/models/viva_general_asr_fan_v103_v055/v1.0.3_v0.5.5
+MODEL_DIR_PRE  = lvp/vui/kws/models/viva_general_dryer_v103_v055/v1.0.3_v0.5.5
 
 INCLUDE_DIR    += $(MODEL_DIR_PRE)/
 INCLUDE_DIR    += $(MODEL_DIR_PRE)/../

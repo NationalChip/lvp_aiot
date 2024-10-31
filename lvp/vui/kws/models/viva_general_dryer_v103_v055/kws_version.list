@@ -7,9 +7,9 @@
 
 choice
     prompt "Model select:"
-    default LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055_UNIVERSAL_450K_MODEL_V0DOT5DOT5_2024_0806
-    depends on LVP_KWS_VIVA_GENERAL_ASR_FAN_V103_V055
+    default LVP_KWS_VIVA_GENERAL_DRYER_V103_V055_V1DOT0DOT3_V0DOT5DOT5_2024_1031
+    depends on LVP_KWS_VIVA_GENERAL_DRYER_V103_V055
 
-    source "lvp/vui/kws/models/viva_general_asr_fan_v103_v055/*/kws_version.name"
+    source "lvp/vui/kws/models/viva_general_dryer_v103_v055/*/kws_version.name"
 endchoice
 

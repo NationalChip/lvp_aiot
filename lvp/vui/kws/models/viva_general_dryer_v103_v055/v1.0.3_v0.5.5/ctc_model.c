@@ -141,8 +141,10 @@ void LvpSetSnpuRunInSram(void)
 
 int LvpCTCModelInitSnpuTask(GX_SNPU_TASK *snpu_task)
 {
-    if (CONFIG_KWS_SNPU_BUFFER_SIZE < sizeof(struct in_out)) {
-        printf ("snpu buffer size is need set:%d\n", sizeof(struct in_out));
+
+    if (CONFIG_KWS_SNPU_BUFFER_SIZE < sizeof(struct in_out_xip)) {
+        printf ("snpu buffer size is need set:%d\n", sizeof(struct in_out_xip));
+
         return -1;
     }
 
