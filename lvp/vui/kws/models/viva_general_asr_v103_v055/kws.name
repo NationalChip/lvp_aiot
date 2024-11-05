@@ -5,7 +5,7 @@
 # Kconfig: One KeyWord Name For ../Kconfig
 #---------------------------------------------------------------------------------#
 
-config LVP_KWS_VIVA_GENERAL_DRYER_V103_V055
-    bool "viva general dryer v103 v055"
+config LVP_KWS_VIVA_GENERAL_ASR_V103_V055
+    bool "viva general asr v103 v055"
 
 #---------------------------------------------------------------------------------#

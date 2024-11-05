@@ -1,0 +1,2 @@
+config LVP_MODEL_VIVA_GENERAL_ASR_V103_V055
+    bool "viva general asr v103 v055"

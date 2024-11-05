@@ -1,7 +1,7 @@
 #include<lvp_attr.h>
 
 #if 0
-const char *kws_version = "viva_general_dryer_v103_v055_v1.0.3_v0.5.5_2024_1031";
+const char *kws_version = "viva_general_asr_v103_v055_v1.0.3_v0.5.5_2024_1105";
 
 const unsigned int total_size = 432434;
 const unsigned int npu_size DRAM0_NPU_KEEP_ATTR = 423142;
