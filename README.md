@@ -2,45 +2,47 @@
 * GX8002 是一款专为低功耗领域设计的**超低功耗 AI 神经网络芯片**，适用于低功耗可穿戴设备和语音遥控器等应用。该芯片具有体积小、功耗低、成本低等显著优势。它集成了杭州国芯微自主研发的第二代神经网络处理器 gxNPU V200，支持 **TensorFlow** 和 **Pytorch** 框架，以及自研的硬件 VAD（语音活动检测），显著降低了功耗。在实际测试场景中，VAD 待机功耗可低至 70uW，运行功耗约为 0.6mW，芯片的平均功耗约为 300uW。
 * 此仓库提供了 GX8002 的低功耗、可配置离线语音识别 SDK，并与viva(https://github.com/NationalChip/viva) 配套使用，开发者可以轻松实现0代码开发 lvp_aiot。
 
-## SDK工具链安装
-* 请阅读：[SDK工具链安装](https://nationalchip.gitlab.io/ai_audio_docs/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#1-sdk)
+## 开发板介绍
+* 请阅读：[GX8002_DEV开发板介绍](https://nationalchip.gitlab.io/ai_audio_docs/hardware/%E5%BC%80%E5%8F%91%E6%9D%BF%E7%A1%AC%E4%BB%B6%E5%8F%82%E8%80%83%E8%AE%BE%E8%AE%A1/GX8002/GX8002_DEV%E5%BC%80%E5%8F%91%E6%9D%BF/)，在此页面您可以下载开发板硬件规格资料和硬件设计资料。
 
-## 默认示例
-``` shell
-cp configs/general_asr/grus_gx8002d_general_asr_v103_v055.config .config
-make defconfig
-make clean;make
-```
-* 默认指令词列表：
-    * 唤醒词：
-        * 小芯小芯
-    * 指令词：
-        * 晾杆上升|衣架上升
-        * 晾杆下降|衣架下降
-        * 停止升降|暂停升降
-        * 打开风扇
-        * 打开一档
-        * 打开二档
-        * 打开三档
-        * 关闭风扇
-        * 播放音乐
-        * 上一首
-        * 下一首
-        * 增大音量
-        * 减小音量
-        * 停止播放
-        * 水壶加热
-        * 停止加热
-        * 温水模式
-        * 沸水模式
-        * 泡茶模式
-        * 功能全关
-        * 打开雾化|开启雾化
-        * 关闭雾化|取消雾化
-        * 温度十六度
-        * 温度十七度
-        * 温度十八度
-        * 温度十九度
+## 快速入门
+* 请阅读：[搭建开发环境](https://nationalchip.gitlab.io/ai_audio_docs/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#1-sdk/) 完成编译环境的安装。
+* 默认示例编译，默认示例的指令词清单见下文的[默认示例的指令词列表](#默认示例的指令词列表)
+    ``` shell
+    cp configs/general_asr/grus_gx8002d_general_asr_v103_v055.config .config
+    make defconfig
+    make clean; make
+    ```
+* 请阅读 [串口升级](https://nationalchip.gitlab.io/ai_audio_docs/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E4%B8%B2%E5%8F%A3%E5%8D%87%E7%BA%A7/) 以了解如何将 output/mcu_nor.bin 文件烧录到我们的开发板 (Grus_Dev_V1.x)。
+* 请阅读 [viva使用指南](https://github.com/NationalChip/viva/blob/main/README.md) 以了解如何使用 viva 零代码开发lvp_aiot.
 
-## 固件烧录：
-* 请阅读：[串口升级](https://nationalchip.gitlab.io/ai_audio_docs/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E4%B8%B2%E5%8F%A3%E5%8D%87%E7%BA%A7/)
+## 默认示例的指令词列表
+* 唤醒词：
+    * 小芯小芯
+* 指令词：
+    * 晾杆上升|衣架上升
+    * 晾杆下降|衣架下降
+    * 停止升降|暂停升降
+    * 打开风扇
+    * 打开一档
+    * 打开二档
+    * 打开三档
+    * 关闭风扇
+    * 播放音乐
+    * 上一首
+    * 下一首
+    * 增大音量
+    * 减小音量
+    * 停止播放
+    * 水壶加热
+    * 停止加热
+    * 温水模式
+    * 沸水模式
+    * 泡茶模式
+    * 功能全关
+    * 打开雾化|开启雾化
+    * 关闭雾化|取消雾化
+    * 温度十六度
+    * 温度十七度
+    * 温度十八度
+    * 温度十九度
