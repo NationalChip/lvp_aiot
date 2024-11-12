@@ -1,5 +1,6 @@
 # lvp_aiot
-低功耗、可配置离线语音识别SDK，配套viva(https://github.com/NationalChip/viva) 可以0代码开发lvp_aiot。
+* GX8002 是一款专为低功耗领域设计的**超低功耗 AI 神经网络芯片**，适用于低功耗可穿戴设备和语音遥控器等应用。该芯片具有体积小、功耗低、成本低等显著优势。它集成了杭州国芯微自主研发的第二代神经网络处理器 gxNPU V200，支持 **TensorFlow** 和 **Pytorch** 框架，以及自研的硬件 VAD（语音活动检测），显著降低了功耗。在实际测试场景中，VAD 待机功耗可低至 70uW，运行功耗约为 0.6mW，芯片的平均功耗约为 300uW。
+* 此仓库提供了 GX8002 的低功耗、可配置离线语音识别 SDK，并与viva(https://github.com/NationalChip/viva) 配套使用，开发者可以轻松实现0代码开发 lvp_aiot。
 
 ## SDK工具链安装
 * 请阅读：[SDK工具链安装](https://nationalchip.gitlab.io/ai_audio_docs/software/lvp/SDK%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/SDK%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#1-sdk)
